@@ -6,49 +6,58 @@ import Prop from './Prop';
  */
 export default class PropPanel {
     props: Map<PropType, number> = new Map();
-    
-    constructor(... props: Prop[]) {
+
+    constructor(...props: Prop[]) {
         for (let i = 0; i < props.length; i++) {
             let p = props[i];
+            if (isNaN(p.value)) {
+                throw new Error("prop value is NaN");
+            }
             this.props.set(p.type, p.value);
         }
     }
-    
+
     /**
      * 获取某个类型的值
      */
     get(type: PropType): number {
         return this.props.get(type) ?? 0;
     }
-    
+
     /**
      * 获取某个类型
      */
     getProp(type: PropType): Prop {
         return type.by(this.get(type));
     }
-    
+
     /**
      * 是否包含某个属性
      */
     hasProp(type: PropType): boolean {
         return this.props.has(type);
     }
-    
+
     /**
      * 增加属性
      */
     addProp(prop: Prop): void {
+        if (isNaN(prop.value)) {
+            throw new Error("prop value is NaN");
+        }
         this.props.set(prop.type, this.get(prop.type) + prop.value);
     }
-    
+
     /**
      * 乘属性
      */
     mulProp(prop: Prop): void {
+        if (isNaN(prop.value)) {
+            throw new Error("prop value is NaN");
+        }
         this.props.set(prop.type, this.get(prop.type) * prop.value);
     }
-    
+
     /**
      * 增加面板属性集合
      */
@@ -59,7 +68,7 @@ export default class PropPanel {
             this.props.set(type, this.get(type) + value);
         }
     }
-    
+
     /**
      * 复制一个面板
      */
@@ -72,7 +81,7 @@ export default class PropPanel {
         }
         return panel;
     }
-    
+
     toString(): string {
         let s = ""
         for (let type of PropType.All) {
@@ -85,8 +94,8 @@ export default class PropPanel {
         }
         return s;
     }
-    
-    
+
+
     /**
      * 总生命值
      */
@@ -96,7 +105,7 @@ export default class PropPanel {
         value += this.get(PropType.HP);
         return value;
     }
-    
+
     /**
      * 总攻击力
      */
@@ -106,7 +115,7 @@ export default class PropPanel {
         value += this.get(PropType.ATK);
         return value;
     }
-    
+
     /**
      * 总防御力
      */

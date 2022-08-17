@@ -11,5 +11,7 @@ export default class WeaponModule implements CoreEngineModule {
             let weapon = new WeaponData(item);
             this.weapons.set(weapon.id, weapon);
         }
+        
+        require("./impl/WeaponBowAmos");
     }
 }

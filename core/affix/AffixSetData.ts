@@ -7,23 +7,23 @@ import AffixData from "./AffixData";
  */
 export default class AffixSetData {
     id: number;
-    
+
     levels: Map<number, AffixData> = new Map();
-    
+
     constructor(id: number) {
         this.id = id;
     }
-    
+
     addAffix(data: any) {
         let affix = new AffixData(data);
         this.levels.set(affix.level, affix);
     }
-    
+
     toString(): string {
         if (this.levels.size == 0) {
             return "";
         } else {
-            return (this.levels.get(0) as AffixData).name;
+            return this.levels.get(0)!.name;
         }
     }
 }

@@ -1,4 +1,5 @@
 import PropPanel from "@/core/foundation/PropPanel";
+import CalcContext from "@/core/foundation/CalcContext";
 import AffixData from "@/core/affix/AffixData";
 import RelicSlotType from "./RelicSlotType";
 import RelicInfo from './RelicInfo';
@@ -12,14 +13,14 @@ export default class RelicPanel {
      * 已装备的圣遗物
      */
     relics = new Map<RelicSlotType, RelicInfo>();
-    
+
     /**
      * 装备圣遗物
      */
     putRelic(relic: RelicInfo) {
         this.relics.set(relic.slot.type, relic);
     }
-    
+
     /**
      * 获取当前已装备所有圣遗物的属性总和
      */
@@ -31,7 +32,7 @@ export default class RelicPanel {
         }
         return panel;
     }
-    
+
     /**
      * 获取当前的所有套装效果
      */
@@ -43,9 +44,9 @@ export default class RelicPanel {
             let c = dict.get(set) ?? 0;
             dict.set(set, ++c);
             for (let i = 0; i < set.setNeedNum.length; i++) {
-                let num = set.setNeedNum[i] as number;
+                let num = set.setNeedNum[i]!;
                 if (num == c) {
-                    let data = set.affixSet.levels.get(i) as AffixData;
+                    let data = set.affixSet.levels.get(i)!;
                     list.push(data);
                     break;
                 } else if (num > c) {
@@ -54,5 +55,12 @@ export default class RelicPanel {
             }
         }
         return list;
+    }
+
+    apply(ctx: CalcContext) {
+        let list = this.getSetAffix();
+        for (let affix of list) {
+            ctx.minePanel.addPanel(affix.addProps);
+        }
     }
 }

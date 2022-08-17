@@ -13,6 +13,7 @@
 </script>
 
 <style lang="scss">
+    @import '@/common/uni.css';
 	/*每个页面公共css */
 	@import '@/uni_modules/uni-scss/index.scss';
 	/* #ifndef APP-NVUE */

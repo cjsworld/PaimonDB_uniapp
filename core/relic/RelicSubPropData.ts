@@ -8,29 +8,29 @@ export default class RelicSubPropData {
      * 属性类型
      */
     propType: PropType;
-    
+
     /**
      * 可能出现的数值（目前规律是等差数列）
      */
     values = Array<number>();
-    
+
     /**
      * 数值最小值
      */
     private baseValue: number;
-    
+
     /**
      * 公差的平均值
      */
     private diffAvg: number;
-    
-    
+
+
     constructor(propType: PropType) {
         this.propType = propType;
         this.baseValue = 0;
         this.diffAvg = 0;
     }
-    
+
     /**
      * 增加一个可能出现的属性值
      */
@@ -44,7 +44,7 @@ export default class RelicSubPropData {
             this.diffAvg = (last - this.baseValue) / (this.values.length - 1);
         }
     }
-    
+
     /**
      * 根据游戏中显示的数值猜测原始精确值
      * <br/>
@@ -58,7 +58,7 @@ export default class RelicSubPropData {
             return value;
         }
     }
-    
+
     /**
      * 根据游戏中显示的数值猜测原始精确值
      * <br/>

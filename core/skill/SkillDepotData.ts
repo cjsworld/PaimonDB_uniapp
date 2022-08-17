@@ -9,11 +9,11 @@ import ProudSkillGroupData from './ProudSkillGroupData';
  */
 export default class SkillDepotData {
     id: number;
-    
+
     skills: SkillData[] = [];
     talents: TalentData[] = [];
     inherentProudSkill: ProudSkillGroupData[] = [];
-    
+
     constructor(data: any) {
         this.id = data.id;
         for (let id of data.skills) {
@@ -30,17 +30,17 @@ export default class SkillDepotData {
             }
         }
         for (let id of data.talents) {
-            this.talents.push(CoreEngine.skill.talents.get(id) as TalentData);
+            this.talents.push(CoreEngine.skill.talents.get(id)!);
         }
         for (let item of data.inherentProudSkillOpens) {
             let id = item.proudSkillGroupId;
             if (!id) {
                 continue;
             }
-            this.inherentProudSkill.push(CoreEngine.skill.proudSkillGroups.get(id) as ProudSkillGroupData);
+            this.inherentProudSkill.push(CoreEngine.skill.proudSkillGroups.get(id)!);
         }
     }
-    
+
     getSkill(type: SkillType): SkillData | undefined {
         return this.skills.find(e => e.triggerId == type.triggerID);
     }

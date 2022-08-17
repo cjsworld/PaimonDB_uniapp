@@ -31,7 +31,7 @@ export default class UpgradeModule implements CoreEngineModule {
             }
         }
     }
-    
+
     async readPromotes(name: string): Promise<void> {
         let config = await CoreEngine.readJsonResource(`${name}PromoteExcelConfigData`);
         for (let item of config) {

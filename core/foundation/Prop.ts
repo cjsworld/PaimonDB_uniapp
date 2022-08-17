@@ -6,12 +6,12 @@ import PropType from "./PropType";
 export default class Prop {
     type: PropType;
     value: number;
-    
+
     constructor(type: PropType, value: number) {
         this.type = type;
         this.value = value;
     }
-    
+
     toString(): string {
         return `${this.type}: ${this.value}`;
     }

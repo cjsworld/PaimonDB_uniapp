@@ -6,6 +6,7 @@ import AvatarModule from '@/core/avatar/AvatarModule';
 import RelicModule from '@/core/relic/RelicModule';
 
 class CoreEngine {
+    private inited = false;
     upgrade = new UpgradeModule();
     affix = new AffixModule();
     skill = new SkillModule();
@@ -14,6 +15,9 @@ class CoreEngine {
     relic = new RelicModule();
 
     async init(): Promise<void> {
+        if (this.inited) {
+            return;
+        }
         console.log("CoreEngine init start");
         let startTime = new Date();
         this.textMap = await this.readJsonResource("TextMapCHS");
@@ -24,16 +28,17 @@ class CoreEngine {
         await this.avatar.init();
         await this.relic.init();
         this.textMap = undefined;
+        this.inited = true;
         let diff = new Date().valueOf() - startTime.valueOf();
         console.log(`CoreEngine init finish in ${diff} ms`);
         console.log(this);
     }
-    
+
     async readJsonResource(filename: string): Promise<any> {
         //console.log("read config " + filename);
         return new Promise((resolve, reject) => {
             uni.request({
-                url:`static/config/${filename}.json`,
+                url: `static/config/${filename}.json`,
                 success: (res) => {
                     resolve(res.data);
                 },
@@ -43,7 +48,7 @@ class CoreEngine {
             });
         });
     }
-    
+
     textMap: any
     getText(hash: number): string {
         if (!this.textMap || !hash) {

@@ -1,15 +1,16 @@
-import CoreEngine from "../CoreEngine";
+import CoreEngine from "@/core/CoreEngine";
+import SkillOption from "@/core/foundation/SkillOption";
 import AvatarData from "./AvatarData";
-import SkillOption from "./SkillOption";
 
 export default abstract class AvatarImpl {
-    abstract getAvatarId(): number;
-    abstract getSkillOptions(): SkillOption[];
-    
+    avatarId: number;
     avatarData: AvatarData;
-    
-    constructor() {
-        this.avatarData = CoreEngine.avatar.avatars.get(this.getAvatarId());
+
+    abstract getSkillOptions(): SkillOption[];
+
+    constructor(avatarId: number) {
+        this.avatarId = avatarId;
+        this.avatarData = CoreEngine.avatar.avatars.get(avatarId)!;
         this.avatarData.impl = this;
     }
 }

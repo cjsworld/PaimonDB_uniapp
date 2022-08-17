@@ -50,13 +50,13 @@ export default class RelicModule implements CoreEngineModule {
             }
             rankData.addSubPropData(item);
         }
-        
+
         let dict = new Map<number, any>();
         config = await CoreEngine.readJsonResource("ReliquaryExcelConfigData");
         for (let item of config) {
             dict.set(item.id, item);
         }
-        
+
         config = await CoreEngine.readJsonResource("ReliquarySetExcelConfigData");
         for (let item of config) {
             if (!item.EquipAffixId) {
@@ -65,10 +65,10 @@ export default class RelicModule implements CoreEngineModule {
             let set = new RelicSetData(item, dict);
             this.sets.set(set.id, set);
         }
-        
+
         config = await CoreEngine.readJsonResource("ReliquaryCodexExcelConfigData");
         for (let item of config) {
-            (this.sets.get(item.suitId) as RelicSetData).allRanks.push(item.level);
+            this.sets.get(item.suitId)!.allRanks.push(item.level);
         }
     }
 }

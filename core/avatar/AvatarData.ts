@@ -12,51 +12,51 @@ import AvatarInfo from './AvatarInfo';
 
 export default class AvatarData {
     id: number;
-    
+
     icon: string;
-    
+
     name: string;
-    
+
     /**
      * 武器类型
      */
     weaponType: WeaponType;
-    
+
     /**
      * 星级
      */
     rank: number;
-    
+
     /**
      * 元素类型
      */
     elemType: ElemType;
-    
+
     /**
      * 基础属性
      */
     baseProp: PropPanel;
-    
+
     /**
      * 升级曲线
      */
     curves: Map<PropType, CurveData>;
-    
+
     /**
      * 突破配置
      */
     promote: PromoteData;
-    
+
     /**
      * 技能配置
      */
     skillDepot: SkillDepotData;
-    
+
     /**
      * 武器实现
      */
     impl: AvatarImpl | undefined;
-    
+
     constructor(data: any) {
         this.id = data.id;
         this.icon = data.iconName.replace("UI_AvatarIcon_", "");
@@ -71,7 +71,7 @@ export default class AvatarData {
             console.log(`Unknown avatar quality ${quality}`);
             this.rank = 0;
         }
-        
+
         this.baseProp = new PropPanel(
             PropType.BaseHP.by(data.hpBase ?? 0),
             PropType.BaseATK.by(data.attackBase ?? 0),
@@ -80,32 +80,34 @@ export default class AvatarData {
             PropType.CritRate.by(data.critical ?? 0),
             PropType.CritHurt.by(data.criticalHurt ?? 0),
         );
-        
+
         this.curves = new Map();
         for (let item of data.propGrowCurves) {
             let propType = PropType.getByConfigName(item.type);
             let curveType = item.growCurve;
-            this.curves.set(propType, CoreEngine.upgrade.curves.get(curveType) as CurveData);
+            this.curves.set(propType, CoreEngine.upgrade.curves.get(curveType)!);
         }
-        
-        this.promote = CoreEngine.upgrade.promotes.get(data.avatarPromoteId) as PromoteData;
+
+        this.promote = CoreEngine.upgrade.promotes.get(data.avatarPromoteId)!;
         this.elemType = ElemType.getByMatID(this.promote.avatarMatId);
-        this.skillDepot = CoreEngine.skill.skillDepots.get(data.skillDepotId) as SkillDepotData;
+        this.skillDepot = CoreEngine.skill.skillDepots.get(data.skillDepotId)!;
     }
-    
+
     newInfo(): AvatarInfo {
         return new AvatarInfo(this);
     }
-    
+
     getBasePanelAt(level: number, promoted: boolean) {
         let panel = this.baseProp.copy();
         for (let entry of this.curves.entries()) {
-            panel.mulProp(entry[0].by(entry[1].getValue(level)));
+            let propType = entry[0];
+            let curve = entry[1];
+            panel.mulProp(propType.by(curve.getValue(level)));
         }
         panel.addPanel(this.promote.getAddPropAt(level, promoted));
         return panel;
     }
-    
+
     toString(): string {
         return this.name;
     }

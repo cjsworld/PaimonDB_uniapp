@@ -10,13 +10,13 @@ export default class RelicMainPropLevelData {
      * 等级（初始1+强化等级）
      */
     level: number
-    
+
     /**
      * 各个属性类型在此强化等级对应的值
      */
     addProps: PropPanel;
-    
-    
+
+
     constructor(data: any) {
         this.level = data.level ?? 0;
         this.addProps = new PropPanel();
@@ -25,7 +25,7 @@ export default class RelicMainPropLevelData {
             this.addProps.addProp(propType.by(prop.value ?? 0));
         }
     }
-    
+
     getProp(type: PropType): Prop {
         return this.addProps.getProp(type);
     }

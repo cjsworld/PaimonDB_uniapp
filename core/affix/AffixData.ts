@@ -6,27 +6,27 @@ export default class AffixData {
     id: number;
     name: string;
     desc: string;
-    
+
     /**
      * 效果等级
      */
     level: number;
-    
+
     /**
      * 增加属性
      */
     addProps: PropPanel;
-    
+
     /**
      * 效果实现名称
      */
     config: string;
-    
+
     /**
      * 参数
      */
     params: number[];
-    
+
     constructor(data: any) {
         this.id = data.id;
         this.name = CoreEngine.getText(data.nameTextMapHash);

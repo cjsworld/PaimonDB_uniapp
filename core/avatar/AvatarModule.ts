@@ -18,5 +18,27 @@ export default class AvatarModule implements CoreEngineModule {
             }
             this.avatars.set(avatar.id, avatar);
         }
+
+        require("./impl/AvatarGanyu");
+    }
+    
+    getSortedAvatars(): AvatarData[] {
+        let list = new Array<AvatarData>();
+        for (let it of this.avatars.values()) {
+            list.push(it);
+        }
+        list.sort((a, b) => {
+            if (a.elemType != b.elemType) {
+                //元素类型正序
+                return a.elemType.index - b.elemType.index;
+            } else if (a.rank != b.rank) {
+                //星级倒序
+                return b.rank - a.rank;
+            } else {
+                //id正序
+                return a.id - b.id;
+            }
+        })
+        return list;
     }
 }

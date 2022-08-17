@@ -9,21 +9,21 @@ export default class PromoteData {
      * 突破配置id
      */
     id: number;
-    
+
     /**
      * 人物突破材料id
      */
     avatarMatId: number | undefined;
-    
+
     /**
      * 突破等级数据
      */
     levels: Array<PromoteLevelData> = [];
-    
+
     constructor(id: number) {
         this.id = id;
     }
-    
+
     addLevel(data: any) {
         let level = new PromoteLevelData(data);
         this.levels.push(level);
@@ -31,7 +31,7 @@ export default class PromoteData {
             this.avatarMatId = data.costItems[0].id;
         }
     }
-    
+
     getAddPropAt(level: number, promoted: boolean): PropPanel {
         for (let i = 0; i < this.levels.length; i++) {
             let data = this.levels[i];

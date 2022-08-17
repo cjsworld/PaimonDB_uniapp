@@ -7,21 +7,21 @@ import ProundSkillData from './ProudSkillData';
  */
 export default class ProudSkillGroupData {
     id: number;
-    
+
     /**
      * 各等级下的数据
      */
     levels: Map<number, ProundSkillData> = new Map();
-    
+
     constructor(id: number) {
         this.id = id;
     }
-    
+
     addSkill(data: any) {
         let skill = new ProundSkillData(data);
         this.levels.set(skill.level, skill);
     }
-    
+
     toString(): string {
         return `ProudSkillGroup${this.id}`;
     }
