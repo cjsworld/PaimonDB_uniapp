@@ -40,13 +40,14 @@ export default class AvatarInfo {
      */
     relic: RelicPanel;
 
-    private skillLevels = new Map<SkillType, number>();
+    skillLevels: Array<number>;
 
     constructor(data: AvatarData) {
         this.data = data;
         this.level = 90;
         this.promoted = false;
         this.constellation = 0;
+        this.skillLevels = [10, 10, 10];
         this.relic = new RelicPanel();
     }
 
@@ -56,11 +57,11 @@ export default class AvatarInfo {
     }
 
     getSkillLevel(skillType: SkillType): number {
-        return this.skillLevels.get(skillType) ?? 10;
+        return this.skillLevels[skillType.index];
     }
 
     setSkillLevel(skillType: SkillType, level: number) {
-        this.skillLevels.set(skillType, level);
+        this.skillLevels[skillType.index] = level;
     }
 
     getSkillProudData(skillType: SkillType): ProudSkillData {

@@ -41,4 +41,15 @@ export default class SkillModule implements CoreEngineModule {
             this.skillDepots.set(skill.id, skill);
         }
     }
+    
+    getSkillLevelOptions(): any[] {
+        let ret = new Array<any>();
+        for (let i = 1; i <= 13; i++) {
+            ret.push({
+                value: i,
+                text: `Lv. ${i}️`
+            })
+        }
+        return ret;
+    }
 }

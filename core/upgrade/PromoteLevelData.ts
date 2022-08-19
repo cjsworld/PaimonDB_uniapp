@@ -4,7 +4,7 @@ import PropType from '@/core/foundation/PropType';
 /**
  * 突破等级配置数据
  */
-export default class PromiteLevelData {
+export default class PromoteLevelData {
     /**
      * 突破等级
      */
@@ -21,7 +21,7 @@ export default class PromiteLevelData {
     addProps: PropPanel;
 
     constructor(data: any) {
-        this.level = data.promoteLevel;
+        this.level = data.promoteLevel ?? 0;
         this.unlockMaxLevel = data.unlockMaxLevel;
         this.addProps = new PropPanel();
         for (let item of data.addProps) {

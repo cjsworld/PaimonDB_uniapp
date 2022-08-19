@@ -3,7 +3,8 @@ import DamageType from "@/core/foundation/DamageType";
 import CalcContext from "@/core/foundation/CalcContext";
 
 export default abstract class SkillOption {
-    abstract name: string;
+    abstract value: number;
+    abstract text: string;
     abstract skillElemType: ElemType;
     abstract damageType: DamageType;
 

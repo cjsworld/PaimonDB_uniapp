@@ -19,7 +19,8 @@ export default new class AvatarGanyu extends AvatarImpl {
 }
 
 class GanyuSkillAZ_2 extends SkillOption {
-    name = "重击-蓄力第二段";
+    value = 0;
+    text = "重击-蓄力第二段";
     skillElemType = ElemType.Ice;
     damageType = DamageType.AZ;
 
@@ -32,7 +33,8 @@ class GanyuSkillAZ_2 extends SkillOption {
 }
 
 class GanyuSkillAZ_AOE extends SkillOption {
-    name = "重击-蓄力范围伤害";
+    value = 1;
+    text = "重击-蓄力范围伤害";
     skillElemType = ElemType.Ice;
     damageType = DamageType.AZ;
 

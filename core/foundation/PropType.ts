@@ -18,7 +18,8 @@ export default class PropType {
     static PercentDEF = new PropType("PercentDEF", "防御力百分比", true, "FIGHT_PROP_DEFENSE_PERCENT");
     static DEF = new PropType("DEF", "防御力", false, "FIGHT_PROP_DEFENSE");
 
-    static IngoreDEF = new PropType("PercentSubDEF", "无视防御力", true, null);
+    static PercentSubDEF = new PropType("PercentSubDEF", "减少防御力", true, null);
+    static IngoreDEF = new PropType("IngoreDEF", "无视防御力", true, null);
 
     static ElemMastery = new PropType("ElemMastery", "元素精通", false, "FIGHT_PROP_ELEMENT_MASTERY");
 

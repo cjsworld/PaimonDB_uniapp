@@ -22,7 +22,7 @@ export default class AvatarModule implements CoreEngineModule {
         require("./impl/AvatarGanyu");
     }
     
-    getSortedAvatars(): AvatarData[] {
+    getAvatarOptions(): any[] {
         let list = new Array<AvatarData>();
         for (let it of this.avatars.values()) {
             list.push(it);
@@ -39,6 +39,24 @@ export default class AvatarModule implements CoreEngineModule {
                 return a.id - b.id;
             }
         })
-        return list;
+        let ret = new Array();
+        for (let it of list) {
+            ret.push({
+                value: it.id,
+                text: `${it.elemType.desc} - ${it.rank}★ - ${it.name}️`
+            });
+        }
+        return ret;
+    }
+    
+    getConstellationOptions(): any[] {
+        let ret = new Array<any>();
+        for (let i = 0; i <= 6; i++) {
+            ret.push({
+                value: i,
+                text: `Lv. ${i}️`
+            })
+        }
+        return ret;
     }
 }

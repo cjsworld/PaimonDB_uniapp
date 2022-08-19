@@ -57,7 +57,9 @@ export default class CalcContext {
         }
 
         //防御区
-        damage *= (this.avatar.level + 100) / (this.avatar.level + 100 + (1 - this.minePanel.get(PropType.IngoreDEF)) * (1 - this.targetPanel.get(PropType.PercentDEF)) * (this.monster.level + 100));
+        let mineDEF = 500 * (1 + 0.01 * this.avatar.level); // 90 -> 1.899999976158142;
+        let targetDEF = 500 * (1 + 0.01 * this.monster.level); // 88 -> 1.8799999952316284;
+        damage *= mineDEF / (mineDEF + (1 - this.minePanel.get(PropType.IngoreDEF)) * (1 - this.targetPanel.get(PropType.PercentSubDEF)) * targetDEF);
 
         //抗性区
         var subHurt = this.targetPanel.get(this.skillOption.skillElemType.subHurtType);
